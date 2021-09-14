@@ -74,6 +74,8 @@ An assignment with id ${id}, name "${name}", description "${descr}", price ${pri
 The creation operation should be successful
     Status Should Be    200     ${post_resp}
 
+Server response should have status code ${status}
+    Status Should Be    ${status}     ${post_resp}
 
 The number of assignments in the system should be "N+1"
     ${list}=    Get list of assignments
