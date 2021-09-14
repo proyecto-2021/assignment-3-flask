@@ -4,13 +4,13 @@ Desarrollar un servidor en Python y Flask que implemente la siguiente especifica
 
 https://documenter.getpostman.com/view/7711154/U16jP6kH
 
-El proyecto debera realizarse de manera individual. Fecha límite de entrega: 20/9
+El proyecto deberá realizarse de manera individual. Fecha límite de entrega: 20/9
 
 # Convenciones que su app debe cumplir para pasar los tests:
 
 ## Dependencias 
 
-Debe tener instalados todos los paquetes en el archivo requirements.txt.
+Debe tener instalados todos los paquetes listados en el archivo requirements.txt.
 
 ## Ejecución de la aplicación
 
@@ -37,6 +37,8 @@ def shutdown():
 El arnés de test hará un post en `/shutdown` al finalizar la ejecución de los mismos.
 
 ## Ejecución del arnés de test
+
+*Importante*: ¡Cargar el ambiente virtual donde se hayan instalado todos los paquetes antes de ejecutar los tests!
 
 Ejecute el comando `./run-tests.sh`. Obtendrá un reporte similar al siguiente:
 

@@ -2,6 +2,7 @@
 Resource    assignment3_high_level_keywords.robot
 
 Suite Setup     Start server and create new session
+#Suite Setup     Create new session
 Suite Teardown  Shutdown server
 
 *** Test Cases ***

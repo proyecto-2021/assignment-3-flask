@@ -22,7 +22,7 @@ Create new session
 
 # Server init and shutdown
 Start server
-    Run Process     ./run.sh  shell=yes
+    Start Process     bash    run.sh  shell=True
     Set Local Variable    ${status}   FAIL
     FOR    ${i}    IN RANGE   ${max_iterations}
         Run  sleep ${sleep_time}
@@ -44,7 +44,6 @@ Shutdown server
 
 
 
-
 An assignment with id ${id} does not exist in the system
     No Operation
 
@@ -57,16 +56,23 @@ The number of assignments in the system is "N"
 
 We create an assignment with id ${id}, name "${name}", description "${descr}", price ${price} and status "${status}"
     ${resp}=    Create assignment     ${id}   ${name}     ${descr}    ${price}    ${status}
-    Set test variable  ${post_status}     ${resp}
-
+    Set test variable  ${post_resp}     ${resp}
 
 
 An assignment with id ${id}, name "${name}", description "${descr}", price ${price} and status "${status}" should be created
-    No Operation
+    ${resp}=    Get by id   ${id}
+    Status Should Be    200     ${resp}
+    ${assignments}=      Get From Dictionary    ${resp.json()}    assignment
+    ${assignment}=      Get From List   ${assignments}   0
+    Dictionary Should Contain Item    ${assignment}    id    ${id}
+    Dictionary Should Contain Item    ${assignment}    name    ${name}
+    Dictionary Should Contain Item    ${assignment}    description    ${descr}
+    Dictionary Should Contain Item    ${assignment}    price    ${price}
+    Dictionary Should Contain Item    ${assignment}    status    ${status}
 
 
 The creation operation should be successful
-    Status Should Be    200     ${post_status}
+    Status Should Be    200     ${post_resp}
 
 
 The number of assignments in the system should be "N+1"

@@ -7,7 +7,7 @@ Library    Collections
 # POSTs
 Create assignment
     [Arguments]     ${id}   ${name}     ${descr}  ${price}    ${status}
-    ${data}=    Create dictionary   id=${id}    name=${name}    description=${descr}  price=${price}  status={status}
+    ${data}=    Create dictionary   id=${${id}}    name=${name}    description=${descr}  price=${${price}}  status=${status}
     ${resp}=    POST On Session  assignment3    /assignments   json=${data}
     [Return]    ${resp}
 
