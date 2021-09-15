@@ -48,8 +48,18 @@ Test Assignment 3
 ==============================================================================
 Scenario: Create a new assignment                                     | PASS |
 ------------------------------------------------------------------------------
+Scenario: Try to create an existing assignment                        | PASS |
+------------------------------------------------------------------------------
+Scenario: Delete an existing assignment                               | PASS |
+------------------------------------------------------------------------------
+Scenario: Try to delete a non existing assignment                     | PASS |
+------------------------------------------------------------------------------
+Scenario: Update an existing assignment                               | PASS |
+------------------------------------------------------------------------------
+Scenario: Try to update a non existing assignment                     | PASS |
+------------------------------------------------------------------------------
 Test Assignment 3                                                     | PASS |
-1 test, 1 passed, 0 failed
+6 tests, 6 passed, 0 failed
 ==============================================================================
 ```
 
