@@ -64,7 +64,7 @@ The number of assignments in the system is "N"
 
 We create an assignment with id ${id}, name "${name}", description "${descr}", price ${price} and status "${status}"
     ${resp}=    Create assignment     ${id}   ${name}     ${descr}    ${price}    ${status}
-    Set test variable  ${post_resp}     ${resp}
+    Set test variable  ${last_resp}     ${resp}
 
 
 An assignment with id ${id}, name "${name}", description "${descr}", price ${price} and status "${status}" should exist
@@ -79,17 +79,26 @@ An assignment with id ${id}, name "${name}", description "${descr}", price ${pri
 
 
 The creation operation should be successful
-    Status Should Be    200     ${post_resp}
+    Status Should Be    200     ${last_resp}
 
 Server response should have status code ${status}
-    Status Should Be    ${status}     ${post_resp}
+    Status Should Be    ${status}     ${last_resp}
 
 The number of assignments in the system should be "N+1"
     ${list}=    Get list of assignments
     ${num_items}=   Get length  ${list}
     Should be equal as integers     ${${prev_num_items}+1}    ${num_items}
 
+The number of assignments in the system should be "N-1"
+    ${list}=    Get list of assignments
+    ${num_items}=   Get length  ${list}
+    Should be equal as integers     ${${prev_num_items}-1}    ${num_items}
+
 The number of assignments in the system should be "N"
     ${list}=    Get list of assignments
     ${num_items}=   Get length  ${list}
     Should be equal as integers     ${prev_num_items}    ${num_items}
+
+We delete the assignment with id ${id}
+    ${resp}=    Delete assignment    ${id}
+    Set test variable  ${last_resp}     ${resp}
