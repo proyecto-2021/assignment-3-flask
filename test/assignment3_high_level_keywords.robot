@@ -45,7 +45,15 @@ Shutdown server
 
 
 An assignment with id ${id} does not exist in the system
-    No Operation
+    Delete if exists assignment    ${id}
+
+
+An assignment with id ${id}, name "${name}", description "${descr}", price ${price} and status "${status}" exists in the system
+    We create an assignment with id ${id}, name "${name}", description "${descr}", price ${price} and status "${status}"
+
+An assignment with id ${id} should not exist in the system
+    ${resp}=    Get by id    ${id}
+    Status Should Be    404     ${resp}
 
 
 The number of assignments in the system is "N"
@@ -59,9 +67,8 @@ We create an assignment with id ${id}, name "${name}", description "${descr}", p
     Set test variable  ${post_resp}     ${resp}
 
 
-An assignment with id ${id}, name "${name}", description "${descr}", price ${price} and status "${status}" should be created
+An assignment with id ${id}, name "${name}", description "${descr}", price ${price} and status "${status}" should exist
     ${resp}=    Get by id   ${id}
-    Status Should Be    200     ${resp}
     ${assignments}=      Get From Dictionary    ${resp.json()}    assignment
     ${assignment}=      Get From List   ${assignments}   0
     Dictionary Should Contain Item    ${assignment}    id    ${id}
@@ -81,3 +88,8 @@ The number of assignments in the system should be "N+1"
     ${list}=    Get list of assignments
     ${num_items}=   Get length  ${list}
     Should be equal as integers     ${${prev_num_items}+1}    ${num_items}
+
+The number of assignments in the system should be "N"
+    ${list}=    Get list of assignments
+    ${num_items}=   Get length  ${list}
+    Should be equal as integers     ${prev_num_items}    ${num_items}
