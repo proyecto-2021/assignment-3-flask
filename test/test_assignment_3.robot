@@ -33,5 +33,22 @@ Scenario: Try to delete a non existing assignment
     And The number of assignments in the system is "N"
     When We delete the assignment with id 12
     Then Server response should have status code 404
+    And An assignment with id 12 should not exist in the system
     And The number of assignments in the system should be "N"
 
+Scenario: Update an existing assignment
+    Given An assignment with id 13, name "Previous Name", description "To be updated", price 20 and status "Update todo" exists in the system
+    And The number of assignments in the system is "N"
+    When We update the name of the assignment with id 13 to "Updated Task Name"
+    Then Server response should have status code 200
+    And An assignment with id 13, name "Updated Task Name", description "To be updated", price 20 and status "Update todo" should exist
+    And The number of assignments in the system should be "N"
+
+
+Scenario: Try to update a non existing assignment
+    Given An assignment with id 14 does not exist in the system
+    And The number of assignments in the system is "N"
+    When We update the name of the assignment with id 14 to "Updated Task Name"
+    Then Server response should have status code 404
+    And An assignment with id 14 should not exist in the system
+    And The number of assignments in the system should be "N"

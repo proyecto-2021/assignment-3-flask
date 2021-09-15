@@ -45,7 +45,7 @@ Shutdown server
 
 
 An assignment with id ${id} does not exist in the system
-    Delete if exists assignment    ${id}
+    Delete assignment if exists    ${id}
 
 
 An assignment with id ${id}, name "${name}", description "${descr}", price ${price} and status "${status}" exists in the system
@@ -101,4 +101,8 @@ The number of assignments in the system should be "N"
 
 We delete the assignment with id ${id}
     ${resp}=    Delete assignment    ${id}
+    Set test variable  ${last_resp}     ${resp}
+
+We update the name of the assignment with id ${id} to "${name}"
+    ${resp}=    Update assignment    ${id}    ${name}
     Set test variable  ${last_resp}     ${resp}

@@ -16,7 +16,7 @@ Create assignment
 Update assignment
     [Arguments]     ${id}   ${name}
     ${data}=    Create dictionary   name=${name}
-    ${resp}=    POST On Session  assignment3    /assignments/${id}   json=${data}   expected_status=any
+    ${resp}=    PUT On Session  assignment3    /assignments/${id}   json=${data}   expected_status=any
     [Return]    ${resp}
 
 
@@ -42,7 +42,7 @@ Delete assignment
     ${resp}=    DELETE On Session  assignment3    /assignments/${id}    expected_status=any
     [Return]    ${resp}
 
-Delete if exists assignment
+Delete assignment if exists
     [Arguments]     ${id}
     ${resp}=    Get by id    ${id}
     IF    ${resp.status_code} == 200
